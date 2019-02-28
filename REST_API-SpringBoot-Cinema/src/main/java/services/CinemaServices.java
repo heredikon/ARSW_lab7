@@ -46,8 +46,8 @@ public class CinemaServices {
 		}
 	}
 
-	public Set<Cinema> getAllCinemas() {
-		return null;
+	public String getAllCinemas() {
+		return "probando shys";
 	}
 
 	/**

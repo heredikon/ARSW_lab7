@@ -14,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import persistence.impl.InMemoryCinemaPersistence;
 import services.CinemaServices;
 
 /**
@@ -24,15 +25,13 @@ import services.CinemaServices;
 @RequestMapping(value = "/cinema")
 public class CinemaAPIController {
 
-    @Autowired
-    @Qualifier("BeanServices")
-    public CinemaServices cs;
+    public InMemoryCinemaPersistence imcp;
 
     @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<String> manejadorGetRecursoXX() {
 //        try {
         //obtener datos que se enviarán a través del API
-        return new ResponseEntity<>("gracias", HttpStatus.ACCEPTED);
+        return new ResponseEntity<>(imcp.cs.getAllCinemas(), HttpStatus.ACCEPTED);
 //        } catch (ResourceNotFoundException ex) {
 //            Logger.getLogger(XXController.class.getName()).log(Level.SEVERE, null, ex);
 //            return new ResponseEntity<>("Error bla bla bla", HttpStatus.NOT_FOUND);
