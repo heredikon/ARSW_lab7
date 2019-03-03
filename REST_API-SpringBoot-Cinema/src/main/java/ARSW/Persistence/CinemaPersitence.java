@@ -46,5 +46,16 @@ public interface CinemaPersitence {
      * @throws CinemaPersistenceException if there is no such cinema
      */
     public Cinema getCinema(String name) throws CinemaPersistenceException;
+    
+    
+    /**
+     * @param name name of the cinema
+     * @param date date(with HH:mm) of the movie
+     * @param movieName name of the movie
+     * @return CinemaFunction
+     * @throws CinemaPersistenceException if there is no such cinema
+     */
+    public CinemaFunction getExactFunction(String name, String date, String movieName) throws CinemaPersistenceException;
+    
 
 }

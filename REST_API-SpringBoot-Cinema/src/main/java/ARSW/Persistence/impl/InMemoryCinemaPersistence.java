@@ -44,7 +44,7 @@ public class InMemoryCinemaPersistence implements CinemaPersitence{
         Cinema c2=new Cinema("cinema2",functions);
         cinemas.put("cinema1", c);
         cinemas.put("cinema2", c2);
-        System.out.println("sdlkjfaslkdjfalsñdkjfñalksdjfñlkasdf++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+        System.out.println(getFunctionsbyCinemaAndDate("cinema1", "2018-12-18"));
     }    
 
     @Override
@@ -75,7 +75,7 @@ public class InMemoryCinemaPersistence implements CinemaPersitence{
 		}
 		List<CinemaFunction> escogidos = new ArrayList();
 		for (CinemaFunction cf : funcionesTotales) {
-			if (cf.getDate().equals(date))
+			if (cf.getDate().contains(date))
 				escogidos.add(cf);
 
 		}
@@ -101,4 +101,16 @@ public class InMemoryCinemaPersistence implements CinemaPersitence{
     public static Map<String, Cinema> getCinemas() {
         return cinemas;
     }
+
+    @Override
+    public CinemaFunction getExactFunction(String name, String date, String movieName) throws CinemaPersistenceException {
+        List<CinemaFunction> funcions = getFunctionsbyCinemaAndDate(name, date);
+        for (CinemaFunction cf : funcions){
+            if (cf.getDate().contains(date.substring(11)) && cf.getMovie().getName().equals(movieName)) return cf;
+        }
+        return null;
+            
+        
+    }
+    
 }

@@ -31,10 +31,9 @@ public class CinemaAPIController {
     @GetMapping("/cinemas")
         public ResponseEntity<?> controllerGetcinemas() {
         try {
-            Map<String, Cinema> cinemas = InMemoryCinemaPersistence.getCinemas();
+            Map<String, Cinema> cinemas = imcp.getCinemas();
             if (cinemas.isEmpty()) {
-                return new ResponseEntity<>("HTTP 404" + "%n" + "   " + cinemas.toString(),
-                        HttpStatus.NOT_FOUND);
+                return new ResponseEntity<>("HTTP 404", HttpStatus.NOT_FOUND);
             }
             return new ResponseEntity<>(cinemas, HttpStatus.ACCEPTED);
         } catch (Exception ex) {
@@ -43,13 +42,12 @@ public class CinemaAPIController {
     }
     
 
-    @GetMapping("/{name}")
+    @GetMapping("cinemas/{name}")
     public ResponseEntity<?> controllerGetName(@PathVariable("name") String name) {
         try {
-            Map<String, Cinema> cinemas = InMemoryCinemaPersistence.getCinemas();
+            Map<String, Cinema> cinemas = imcp.getCinemas();
             if (cinemas.get(name) == null) {
-                return new ResponseEntity<>("HTTP 404" + "%n" + "   " + cinemas.toString(),
-                        HttpStatus.NOT_FOUND);
+                return new ResponseEntity<>("HTTP 404", HttpStatus.NOT_FOUND);
             }
             return new ResponseEntity<>(cinemas.get(name), HttpStatus.ACCEPTED);
         } catch (Exception ex) {
@@ -57,15 +55,28 @@ public class CinemaAPIController {
         }
     }
     
-    @GetMapping("/{name}/{date}")
+    @GetMapping("cinemas/{name}/{date}")
         public ResponseEntity<?> controllerGetNameAndDate(@PathVariable("name") String name, @PathVariable("date") String date) {
         try {
-            Map<String, Cinema> cinemas = InMemoryCinemaPersistence.getCinemas();
+            Map<String, Cinema> cinemas = imcp.getCinemas();
             if (cinemas.get(name) == null) {
-                return new ResponseEntity<>("HTTP 404" + "%n" + "   " + cinemas.toString(),
-                        HttpStatus.NOT_FOUND);
+                return new ResponseEntity<>("HTTP 404", HttpStatus.NOT_FOUND);
             }
-            return new ResponseEntity<>(cinemas.get(name), HttpStatus.ACCEPTED);
+            return new ResponseEntity<>(imcp.getFunctionsbyCinemaAndDate(name, date), HttpStatus.ACCEPTED);
+        } catch (Exception ex) {
+            return new ResponseEntity<>("ERROR 404 NOT FOUND", HttpStatus.NOT_FOUND);
+        }
+    }
+        
+        @GetMapping("cinemas/{name}/{date}/{moviename}")
+ 
+        public ResponseEntity<?> controllerGetExactFunction(@PathVariable("name") String name, @PathVariable("date") String date, @PathVariable("moviename") String moviename) {
+        try {
+            //Map<String, Cinema> cinemas = imcp.getCinemas();
+            if (imcp.getExactFunction(name, date, moviename) == null) {
+                return new ResponseEntity<>("HTTP 404", HttpStatus.NOT_FOUND);
+            }
+            return new ResponseEntity<>(imcp.getExactFunction(name, date, moviename), HttpStatus.ACCEPTED);
         } catch (Exception ex) {
             return new ResponseEntity<>("ERROR 404 NOT FOUND", HttpStatus.NOT_FOUND);
         }
