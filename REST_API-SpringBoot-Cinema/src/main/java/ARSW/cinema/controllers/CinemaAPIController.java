@@ -10,6 +10,7 @@ import java.util.Map;
 import java.util.Set;
 
 import ARSW.entities.Cinema;
+import ARSW.entities.CinemaFunction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
@@ -27,9 +28,9 @@ public class CinemaAPIController {
 
     @Autowired
     public InMemoryCinemaPersistence imcp;
-    
+
     @GetMapping("/cinemas")
-        public ResponseEntity<?> controllerGetcinemas() {
+    public ResponseEntity<?> controllerGetcinemas() {
         try {
             Map<String, Cinema> cinemas = imcp.getCinemas();
             if (cinemas.isEmpty()) {
@@ -40,7 +41,6 @@ public class CinemaAPIController {
             return new ResponseEntity<>("ERROR 404 NOT FOUND", HttpStatus.NOT_FOUND);
         }
     }
-    
 
     @GetMapping("cinemas/{name}")
     public ResponseEntity<?> controllerGetName(@PathVariable("name") String name) {
@@ -54,9 +54,9 @@ public class CinemaAPIController {
             return new ResponseEntity<>("ERROR 404 NOT FOUND", HttpStatus.NOT_FOUND);
         }
     }
-    
+
     @GetMapping("cinemas/{name}/{date}")
-        public ResponseEntity<?> controllerGetNameAndDate(@PathVariable("name") String name, @PathVariable("date") String date) {
+    public ResponseEntity<?> controllerGetNameAndDate(@PathVariable("name") String name, @PathVariable("date") String date) {
         try {
             Map<String, Cinema> cinemas = imcp.getCinemas();
             if (cinemas.get(name) == null) {
@@ -67,10 +67,10 @@ public class CinemaAPIController {
             return new ResponseEntity<>("ERROR 404 NOT FOUND", HttpStatus.NOT_FOUND);
         }
     }
-        
-        @GetMapping("cinemas/{name}/{date}/{moviename}")
- 
-        public ResponseEntity<?> controllerGetExactFunction(@PathVariable("name") String name, @PathVariable("date") String date, @PathVariable("moviename") String moviename) {
+
+    @GetMapping("cinemas/{name}/{date}/{moviename}")
+
+    public ResponseEntity<?> controllerGetExactFunction(@PathVariable("name") String name, @PathVariable("date") String date, @PathVariable("moviename") String moviename) {
         try {
             //Map<String, Cinema> cinemas = imcp.getCinemas();
             if (imcp.getExactFunction(name, date, moviename) == null) {
@@ -81,7 +81,20 @@ public class CinemaAPIController {
             return new ResponseEntity<>("ERROR 404 NOT FOUND", HttpStatus.NOT_FOUND);
         }
     }
+    
+    @PostMapping("/Cinemas/{name}")
+    public ResponseEntity<?> manejadorPostRecursoXX(@RequestBody CinemaFunction o,
+            @PathVariable String name){
+        try{
+            imcp.addFunction(name, o);
+            return new ResponseEntity<>("ACCEPTED",HttpStatus.ACCEPTED);
+        }catch(Exception ex){
+            return new ResponseEntity<>("HTTP UNSUCCESFUL",HttpStatus.FORBIDDEN);
+        }
+        
+        
+    }
+    
+    
 
 }
-
-

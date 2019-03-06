@@ -27,78 +27,80 @@ import org.springframework.stereotype.Service;
 @Service("BeanServices")
 public class CinemaServices {
 
-	@Autowired
-	@Qualifier("Bean1")
-	public CinemaPersitence cps =null;
-	
-	@Autowired
-	@Qualifier("Bean3")
-	public FilterFilm  filtro;
-	public CinemaFunction cf;
-	public Cinema cine;
+    @Autowired
+    @Qualifier("Bean1")
+    public CinemaPersitence cps = null;
 
-	public void addNewCinema(Cinema c) {
-		try {
-			cps.saveCinema(c);
-		} catch (CinemaPersistenceException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
+    @Autowired
+    @Qualifier("Bean3")
+    public FilterFilm filtro;
+    public CinemaFunction cf;
+    public Cinema cine;
 
-	public String getAllCinemas() {
-		return "probando shys";
-	}
+    public void addNewCinema(Cinema c) {
+        try {
+            cps.saveCinema(c);
+        } catch (CinemaPersistenceException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
 
-	/**
-	 * @param name cinema's name
-	 * @return the cinema of the given name created by the given author
-	 * @throws CinemaException
-	 */
-	public Cinema getCinemaByName(String name) throws CinemaException {
+    public String getAllCinemas() {
+        return "probando shys";
+    }
 
-		try {
-			return this.cps.getCinema(name);
-		} catch (CinemaPersistenceException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return cine;
-	}
+    /**
+     * @param name cinema's name
+     * @return the cinema of the given name created by the given author
+     * @throws CinemaException
+     */
+    public Cinema getCinemaByName(String name) throws CinemaException {
 
-	public  List<Movie> showFilter(String cine, String date,String filtroes) {
-		
-		if(filtro.getClass().getName().equals("Filteredbygender")) {
-			return filtro.filtreType(cine, date, filtroes,cps);
-			
-		}
-		else {
-			return filtro.filtreType(cine, date, filtroes,cps);
-		}
-		
-		
-	}
-	public void buyTicket(int row, int col, String cinema, String date, String movieName)
-			 {
-		try {
-			cps.buyTicket(row, col, cinema, date, movieName);
-		} catch (CinemaException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+        try {
+            return this.cps.getCinema(name);
+        } catch (CinemaPersistenceException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return cine;
+    }
 
-	}
+    public List<Movie> showFilter(String cine, String date, String filtroes) {
 
-	public List<CinemaFunction> getFunctionsbyCinemaAndDate(String cinema, String date) {
-		return cps.getFunctionsbyCinemaAndDate(cinema, date);
-	}
+        if (filtro.getClass().getName().equals("Filteredbygender")) {
+            return filtro.filtreType(cine, date, filtroes, cps);
 
-	public CinemaPersitence getCps() {
-		return cps;
-	}
+        } else {
+            return filtro.filtreType(cine, date, filtroes, cps);
+        }
 
-	public void setCps(CinemaPersitence cps) {
-		this.cps = cps;
-	}
+    }
+
+    public void buyTicket(int row, int col, String cinema, String date, String movieName) {
+        try {
+            cps.buyTicket(row, col, cinema, date, movieName);
+        } catch (CinemaException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+    }
+    
+    public void insertFunction(CinemaFunction funcion){
+        
+    }
+
+    public List<CinemaFunction> getFunctionsbyCinemaAndDate(String cinema, String date) {
+        return cps.getFunctionsbyCinemaAndDate(cinema, date);
+    }
+
+    public CinemaPersitence getCps() {
+        return cps;
+    }
+
+    public void setCps(CinemaPersitence cps) {
+        this.cps = cps;
+    }
 
 }

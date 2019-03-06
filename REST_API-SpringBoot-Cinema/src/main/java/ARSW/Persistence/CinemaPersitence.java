@@ -47,7 +47,11 @@ public interface CinemaPersitence {
      */
     public Cinema getCinema(String name) throws CinemaPersistenceException;
     
-    
+    /**
+     * @param cinemaName name of the cinema
+     * @param newFunction function to add 
+     */
+    public void addFunction(String cinemaName, CinemaFunction newFunction);
     /**
      * @param name name of the cinema
      * @param date date(with HH:mm) of the movie
