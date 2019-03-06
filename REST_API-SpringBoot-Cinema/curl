@@ -1,0 +1,5 @@
+curl -i -X POST -H 'Content-Type: application/json' -d '{"movie":{"name":"Las Negras aventuras de jezhus","genre":"Documetary"},"date":"2019-12-18 15:30"} http://localhost:8080/cinemas/cinema1
+
+,"seats":[[true,true,true,true,true,true,true,true,true,true,true,true],[true,true,true,true,true,true,true,true,true,true,true,true],[true,true,true,true,true,true,true,true,true,true,true,true],[true,true,true,true,true,true,true,true,true,true,true,true],[true,true,true,true,true,true,true,true,true,true,true,true],[true,true,true,true,true,true,true,true,true,true,true,true],[true,true,true,true,true,true,true,true,true,true,true,true]]
+
+curl -i -X POST -H 'Content-Type: application/json' -d '{"movie":{"name":"hola","genre":"terror"},"date": "2018-12-18 15:30"}' http://localhost:8080/cinemas/cineMania 

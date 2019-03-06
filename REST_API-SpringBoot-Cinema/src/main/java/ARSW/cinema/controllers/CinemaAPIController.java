@@ -82,12 +82,12 @@ public class CinemaAPIController {
         }
     }
     
-    @PostMapping("/Cinemas/{name}")
+    @RequestMapping(method = RequestMethod.POST,value ="/cinemas/{name}")
     public ResponseEntity<?> manejadorPostRecursoXX(@RequestBody CinemaFunction o,
             @PathVariable String name){
         try{
             imcp.addFunction(name, o);
-            return new ResponseEntity<>("ACCEPTED",HttpStatus.ACCEPTED);
+            return new ResponseEntity<>("CREATED",HttpStatus.CREATED);
         }catch(Exception ex){
             return new ResponseEntity<>("HTTP UNSUCCESFUL",HttpStatus.FORBIDDEN);
         }

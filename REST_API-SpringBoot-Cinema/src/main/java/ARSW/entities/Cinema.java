@@ -35,6 +35,9 @@ public class Cinema {
     public String getName() {
         return name;
     }
+    public void addFunction(CinemaFunction cf){
+        this.functions.add(cf);
+    }
 
     public void setName(String name) {
         this.name = name;

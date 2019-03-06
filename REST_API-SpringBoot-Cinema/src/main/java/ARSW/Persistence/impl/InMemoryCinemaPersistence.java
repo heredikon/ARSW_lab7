@@ -115,7 +115,7 @@ public class InMemoryCinemaPersistence implements CinemaPersitence{
 
     @Override
     public void addFunction(String cinemaName, CinemaFunction newFunction) {
-        cinemas.get(cinemaName).addFunctions(newFunction);
+        cinemas.get(cinemaName).addFunction(newFunction);
             
         
         
